@@ -9,7 +9,8 @@
 #   Defaults to 'present'.
 #
 class cinder::client(
-  $package_ensure = 'present'
+  $package_ensure = 'present',
+  $package_name   = $::cinder::params::client_package,
 ) {
 
   include ::cinder::deps
@@ -17,7 +18,7 @@ class cinder::client(
 
   package { 'python-cinderclient':
     ensure => $package_ensure,
-    name   => $::cinder::params::client_package,
+    name   => $package_name,
     tag    => ['openstack', 'cinder-support-package'],
   }
 
